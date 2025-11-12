@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: geo-jobs - Domain name
+Description: geo-jobs-ekomia - Domain name
 
 Parameters:
   DomainName:
