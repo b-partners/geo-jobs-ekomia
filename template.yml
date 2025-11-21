@@ -30,7 +30,7 @@ Globals:
         AWS_EVENT_STACK_2_SQS_QUEUE_URL: !Sub '{{resolve:ssm:/geo-jobs-ekomia/${Env}/2/sqs/mailbox-queue-url}}'
         AWS_EVENT_STACK_3_SQS_QUEUE_URL: !Sub '{{resolve:ssm:/geo-jobs-ekomia/${Env}/3/sqs/mailbox-queue-url}}'
         AWS_EVENT_STACK_4_SQS_QUEUE_URL: !Sub '{{resolve:ssm:/geo-jobs-ekomia/${Env}/4/sqs/mailbox-queue-url}}'
-        
+
         SENTRY_DSN: !Sub '{{resolve:ssm:/geo-jobs-ekomia/sentry/dsn}}'
         SENTRY_ENVIRONMENT: !Ref Env
         TILES_DOWNLOADER_API_URL: !Sub '{{resolve:ssm:/geo-jobs/${Env}/tiles/downloader/url}}'
@@ -70,7 +70,7 @@ Resources:
       MemorySize: 2048
       Timeout: 300
       Role: !Sub '{{resolve:ssm:/geo-jobs-ekomia/${Env}/execution/role-arn}}'
-      
+
       FunctionUrlConfig:
         AuthType: NONE
         InvokeMode: BUFFERED
@@ -125,9 +125,13 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: app.bpartners.geojobs.handler.MailboxEventHandler::handleRequest
-      MemorySize: 10240
+      MemorySize: 7077
       Timeout: 900 #note(sqs-visibility)
       Role: !Sub '{{resolve:ssm:/geo-jobs-ekomia/${Env}/execution/role-arn}}'
+      SnapStart:
+        ApplyOn: None
+      EphemeralStorage:
+        Size: 1024
       Events:
         AllEvents:
           Type: SQS
