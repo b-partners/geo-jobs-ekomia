@@ -1,6 +1,6 @@
 {
   "emailReceiver": "tech@birdia.fr",
-  "zoneName": "github actions detection sync geojson it",
+  "zoneName": "[ekomia] monitoring detections sync",
   "geoServerProperties": null,
   "needsImageOutput": true,
   "geoJsonDelimitationType": "ROOF",
